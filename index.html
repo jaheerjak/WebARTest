@@ -1,78 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web AR</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-       #unityContainer {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 2;  /* Unity game on top */
-        }
+<html lang="en-us"> 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | WebGL Test AR</title>
+    <script src="Build/UnityLoader.js"></script>
+    <script src="js/three.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
 
-        a-scene {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;  /* AR.js scene below */
-        }
-    </style>
-</head>
-<body>
-
-    <!-- AR.js / A-Frame code for Web AR -->
-    <a-scene embedded arjs>
-        <a-box position="0 0.5 0" material="color: red;"></a-box>
-        <a-marker-camera preset="hiro"></a-marker-camera>
-    </a-scene>
-
-    <!-- Unity WebGL container -->
-    <div id="unityContainer" style="width: 100%; height: 100%;"></div>
-
-    <!-- Load Unity Build -->
-    <script>
-        var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/Build.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Build.data",
-        frameworkUrl: buildUrl + "/Build.framework.js",
-        codeUrl: buildUrl + "/Build.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "WebAR-Can",
-        productVersion: "0.1",
-      };
-
-
-        var container = document.querySelector("#unityContainer");
-        var canvas = document.createElement("canvas");
-        container.appendChild(canvas);
-
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-            createUnityInstance(canvas, config, (progress) => {
-                // Unity Progress
-            }).then((unityInstance) => {
-                // Unity Instance is ready
-            }).catch((message) => {
-                alert(message);
-            });
-        };
-        document.body.appendChild(script);
-    </script>
-</body>
+  <body>
+    <div id="images">
+			<img id="earth" src="images\earth.jpg" />			<img id="moon" src="images\moon.jpg" />			<img id="MexicanSkull" src="images\MexicanSkull.jpg" />
+    </div>
+    <div id="unityContainer"></div>    
+    <script src="js/app.js"></script>
+  </body>
 </html>
