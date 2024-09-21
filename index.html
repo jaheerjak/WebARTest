@@ -38,13 +38,14 @@
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/Build.loader.js";
         var config = {
-            dataUrl: buildUrl + "/{{ DATA_FILENAME }}",
-            frameworkUrl: buildUrl + "/{{ FRAMEWORK_FILENAME }}",
-            codeUrl: buildUrl + "/{{ CODE_FILENAME }}",
+            dataUrl: buildUrl + "/Build.data",
+            frameworkUrl: buildUrl + "/Build.framework.js",
+            codeUrl: buildUrl + "/Build.wasm",
             streamingAssetsUrl: "StreamingAssets",
-            companyName: "{{ COMPANY_NAME }}",
-            productName: "{{ PRODUCT_NAME }}",
-            productVersion: "{{ PRODUCT_VERSION }}",
+            companyName: "DefaultCompany",
+            productName: "WebAR-Can",
+            productVersion: "0.1"
+
         };
 
         var container = document.querySelector("#unityContainer");
