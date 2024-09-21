@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web AR</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #unityContainer {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AR.js / A-Frame code for Web AR -->
+    <a-scene embedded arjs>
+        <a-box position="0 0.5 0" material="color: red;"></a-box>
+        <a-marker-camera preset="hiro"></a-marker-camera>
+    </a-scene>
+
+    <!-- Unity WebGL container -->
+    <div id="unityContainer" style="width: 100%; height: 100%;"></div>
+
+    <!-- Load Unity Build -->
+    <script>
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/{{ LOADER_FILENAME }}";
+        var config = {
+            dataUrl: buildUrl + "/{{ DATA_FILENAME }}",
+            frameworkUrl: buildUrl + "/{{ FRAMEWORK_FILENAME }}",
+            codeUrl: buildUrl + "/{{ CODE_FILENAME }}",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "{{ COMPANY_NAME }}",
+            productName: "{{ PRODUCT_NAME }}",
+            productVersion: "{{ PRODUCT_VERSION }}",
+        };
+
+        var container = document.querySelector("#unityContainer");
+        var canvas = document.createElement("canvas");
+        container.appendChild(canvas);
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                // Unity Progress
+            }).then((unityInstance) => {
+                // Unity Instance is ready
+            }).catch((message) => {
+                alert(message);
+            });
+        };
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
