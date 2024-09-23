@@ -67,7 +67,10 @@
         });
       };
       document.body.appendChild(script);
-	  unityInstance.Module.WebXR.toggleAR();
+	  document.addEventListener('onARSupportedCheck', function (event) {
+        unityInstance.Module.WebXR.toggleAR();
+      }, false);
+	  
     </script>
   </body>
 </html>
