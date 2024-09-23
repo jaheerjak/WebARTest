@@ -68,11 +68,17 @@
       };
       document.body.appendChild(script);
 
-     
+      let enterARButton = document.getElementById('enterar');
+      let enterVRButton = document.getElementById('entervr');
 
       
-	unityInstance.Module.WebXR.toggleAR();
-     
+
+      enterARButton.addEventListener('click', function (event) {
+        unityInstance.Module.WebXR.toggleAR();
+      }, false);
+      enterVRButton.addEventListener('click', function (event) {
+        unityInstance.Module.WebXR.toggleVR();
+      }, false);
     </script>
   </body>
 </html>
