@@ -60,12 +60,12 @@
         }).then((instance) => {
           unityInstance = instance;
           loadingBar.style.display = "none";
-         <!-- if (fullscreenButton)
+          if (fullscreenButton)
           {
             fullscreenButton.onclick = () => {
               unityInstance.SetFullscreen(1);
             };
-          }-->
+          }
 		  unityInstance.SetFullscreen(1);
 		  unityInstance.Module.WebXR.toggleAR();
         }).catch((message) => {
