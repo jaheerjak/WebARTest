@@ -21,6 +21,7 @@
         </div>
       </div>
       <div id="unity-footer">
+	  <button id="enterar" value="Enter AR" disabled>AR</button>
         <div id="unity-webgl-logo"></div>
       </div>
     </div>
@@ -62,15 +63,21 @@
               unityInstance.SetFullscreen(1);
             };
           }
-		  unityInstance.Module.WebXR.toggleAR();
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
-	  document.addEventListener('onARSupportedCheck', function (event) {
-        
+	  let enterARButton = document.getElementById('enterar');
+
+      document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
       }, false);
+      
+      enterARButton.addEventListener('click', function (event) {
+        unityInstance.Module.WebXR.toggleAR();
+      }, false);
+      
 	  
     </script>
   </body>
