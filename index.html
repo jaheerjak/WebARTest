@@ -63,20 +63,19 @@
               unityInstance.SetFullscreen(1);
             };
           }
+		  let enterARButton = document.getElementById('enterar');
+		  document.addEventListener('onARSupportedCheck', function (event) {
+			enterARButton.disabled = !event.detail.supported;
+			if (event.detail.supported) {
+			  unityInstance.Module.WebXR.toggleAR();  // Auto call AR if supported
+			}
+		  }, false);
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
-	  let enterARButton = document.getElementById('enterar');
-
-      document.addEventListener('onARSupportedCheck', function (event) {
-        enterARButton.disabled = !event.detail.supported;
-      }, false);
-      
-      enterARButton.addEventListener('click', function (event) {
-        unityInstance.Module.WebXR.toggleAR();
-      }, false);
+	  
       
 	  
     </script>
