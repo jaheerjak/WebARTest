@@ -62,13 +62,14 @@
               unityInstance.SetFullscreen(1);
             };
           }
+		  unityInstance.Module.WebXR.toggleAR();
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
 	  document.addEventListener('onARSupportedCheck', function (event) {
-        unityInstance.Module.WebXR.toggleAR();
+        
       }, false);
 	  
     </script>
