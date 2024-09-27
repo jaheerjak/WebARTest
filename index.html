@@ -85,7 +85,9 @@
       document.addEventListener('onARSupportedCheck', function (event) {
         enterARButton.disabled = !event.detail.supported;
       }, false);
-	
+	 enterARButton.addEventListener('click', function (event) {
+        unityInstance.Module.WebXR.toggleAR();
+      }, false);
 	function EnableARFunc(){	 
         unityInstance.Module.WebXR.toggleAR();      
 	}
