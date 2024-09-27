@@ -63,7 +63,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-			 setTimeout(EnableARFunc, 500);
+			 setTimeout(EnableARFunc, 1500);
         }).catch((message) => {
           alert(message);
         });
@@ -80,7 +80,11 @@
 		return true;
 	}
 	document.body.appendChild(script);
-	 
+	  let enterARButton = document.getElementById('enterar');
+
+      document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
+      }, false);
 	
 	function EnableARFunc(){	 
         unityInstance.Module.WebXR.toggleAR();      
