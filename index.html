@@ -63,7 +63,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-		   
+		   setInterval(EnableARFunc, 2000);
       
         }).catch((message) => {
           alert(message);
@@ -85,7 +85,7 @@
 	  document.addEventListener('onARSupportedCheck', function (event) {
 		enterARButton.disabled = !event.detail.supported;			
 	  }, false);
-	setInterval(EnableARFunc, 2000);
+	
 	function EnableARFunc(){
 	 
       <!--enterARButton.addEventListener('click', function (event) {
