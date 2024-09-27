@@ -63,7 +63,8 @@
               unityInstance.SetFullscreen(1);
             };
           }
-		  
+		   
+      
         }).catch((message) => {
           alert(message);
         });
@@ -79,14 +80,19 @@
 		}
 		return true;
 	}
-      document.body.appendChild(script);
-	  let enterARButton = document.getElementById('enterar');
-		  document.addEventListener('onARSupportedCheck', function (event) {
-			enterARButton.disabled = !event.detail.supported;			
-		  }, false);
-      enterARButton.addEventListener('click', function (event) {
+	document.body.appendChild(script);
+	 let enterARButton = document.getElementById('enterar');
+	  document.addEventListener('onARSupportedCheck', function (event) {
+		enterARButton.disabled = !event.detail.supported;			
+	  }, false);
+	setInterval(EnableARFunc, 2000);
+	function EnableARFunc(){
+	 
+      <!--enterARButton.addEventListener('click', function (event) {
         unityInstance.Module.WebXR.toggleAR();
-      }, false);
+      }, false);-->
+	}
+      
 	  
     </script>
   </body>
