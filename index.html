@@ -7,7 +7,7 @@
     <title>Unity WebGL Player | Unity WebXR Export</title>
     <meta name="description" content="Complete interactive 3D scene demo made in Unity and exported to WebXR with the WebXR template of the Unity WebXR Export">
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <link rel="stylesheet" href="TemplateData/style.css">	
   </head>
   <body>
     <div id="unity-container">
@@ -20,11 +20,13 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div id="unity-footer">
+      <div >
 	  <button id="enterar" value="Enter AR " disabled>AR</button>
         <div id="unity-webgl-logo"></div>
       </div>
+	  
     </div>
+	
     <script>
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebARTest.loader.js";
@@ -63,7 +65,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-			 setTimeout(EnableARFunc, 1500);
+			 setTimeout(EnableARFunc, 2500);
         }).catch((message) => {
           alert(message);
         });
@@ -82,16 +84,17 @@
 	document.body.appendChild(script);
 	  let enterARButton = document.getElementById('enterar');
 
-      document.addEventListener('onARSupportedCheck', function (event) {
-        enterARButton.disabled = !event.detail.supported;
-      }, false);
+      
 	 enterARButton.addEventListener('click', function (event) {
         unityInstance.Module.WebXR.toggleAR();
       }, false);
-	function EnableARFunc(){	 
+	function EnableARFunc(){	
+	document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
+      }, false);	
         unityInstance.Module.WebXR.toggleAR();      
 	}
-      
+     
 	  
     </script>
   </body>
