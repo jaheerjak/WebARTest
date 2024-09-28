@@ -65,7 +65,6 @@
               unityInstance.SetFullscreen(1);
             };
           }
-			 setTimeout(EnableARFunc, 2500);
         }).catch((message) => {
           alert(message);
         });
@@ -84,14 +83,14 @@
 	document.body.appendChild(script);
 	  let enterARButton = document.getElementById('enterar');
 
-      
+      document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
+      }, false);
 	 enterARButton.addEventListener('click', function (event) {
         unityInstance.Module.WebXR.toggleAR();
       }, false);
 	function EnableARFunc(){	
-	document.addEventListener('onARSupportedCheck', function (event) {
-        enterARButton.disabled = !event.detail.supported;
-      }, false);	
+		
         unityInstance.Module.WebXR.toggleAR();      
 	}
      
