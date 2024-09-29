@@ -20,9 +20,10 @@
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-      <div >
-	  <button id="enterar" value="Enter AR " disabled>AR</button>
+      <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
+        <button id="enterar" value="Enter AR" disabled>AR</button>
+        
       </div>
 	  
     </div>
@@ -65,11 +66,7 @@
               unityInstance.SetFullscreen(1);
             };
           }
-		  let intervalId = setInterval(function() {
-            unityInstance.Module.WebXR.toggleAR(); 
-			console.log("This will run only once");
-            clearInterval(intervalId); // Stops further intervals
-        }, 3000);
+		  
 		  
         }).catch((message) => {
           alert(message);
@@ -88,7 +85,11 @@
 	}
 	document.body.appendChild(script);
 	  let enterARButton = document.getElementById('enterar');
-
+	let intervalId = setInterval(function() {
+            unityInstance.Module.WebXR.toggleAR(); 
+			console.log("This will run only once");
+            clearInterval(intervalId); // Stops further intervals
+        }, 6000);
       document.addEventListener('onARSupportedCheck', function (event) {
         enterARButton.disabled = !event.detail.supported;
       }, false);
