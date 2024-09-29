@@ -66,9 +66,11 @@
             };
           }
 		  let intervalId = setInterval(function() {
-            EnableARFunc();
+            unityInstance.Module.WebXR.toggleAR(); 
+			console.log("This will run only once");
             clearInterval(intervalId); // Stops further intervals
         }, 3000);
+		  
         }).catch((message) => {
           alert(message);
         });
@@ -93,10 +95,11 @@
 	 enterARButton.addEventListener('click', function (event) {
         unityInstance.Module.WebXR.toggleAR();
       }, false);
-	function EnableARFunc(){	
-		
-        unityInstance.Module.WebXR.toggleAR();      
-	}
+	  
+		function EnableARFunc(){	
+			
+			unityInstance.Module.WebXR.toggleAR();      
+		}
      
 	  
     </script>
