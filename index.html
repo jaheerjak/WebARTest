@@ -65,6 +65,10 @@
               unityInstance.SetFullscreen(1);
             };
           }
+		  let intervalId = setInterval(function() {
+            EnableARFunc();
+            clearInterval(intervalId); // Stops further intervals
+        }, 3000);
         }).catch((message) => {
           alert(message);
         });
