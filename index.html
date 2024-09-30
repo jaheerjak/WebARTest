@@ -123,7 +123,15 @@
         return true;
       }
       document.body.appendChild(script);
-      
+       window.addEventListener('offline', function() {
+        console.log('You are offline. Waiting for the connection to be restored...');
+        // Optionally, display a message or visual indicator for offline status.
+    });
+
+    window.addEventListener('online', function() {
+        console.log('Network connection restored. Refreshing the page...');
+        window.location.reload();  // Automatically refresh when back online.
+    });
       function EnableARFunc(){ 
 	bgContainer.style.display = "none";	  
         unityInstance.Module.WebXR.toggleAR(); // Call AR function when the button is clicked
