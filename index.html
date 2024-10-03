@@ -8,8 +8,48 @@
     <meta name="description" content="Complete interactive 3D scene demo made in Unity and exported to WebXR with the WebXR template of the Unity WebXR Export">
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+        .bgcontainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999; /* Highest z-index to place above all other elements */
+            display: none;  /* Hide background initially */
+        }
+
+        .bgcontainer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Style for the button */
+        .bgbutton {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust to ensure proper centering */
+            padding: 10px 20px;
+            background-color: #F68D2E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+			font-size: 24px; 
+            cursor: pointer;
+            z-index: 10000; /* Ensure the button is above the background image */
+			width: 200px; /* Optional: define fixed width */
+			height: 70px;  /* Optional: define fixed height */
+        }
+    </style> 
   </head>
   <body>
+    <div class="bgcontainer" id="bg-container">
+        <img src="TemplateData/bg.png" alt="background">
+        <button class="bgbutton" id="arButton" onclick="EnableARFunc()">Tap to Continue</button> <!-- Button centered on background -->
+    </div>
+
     <div id="unity-container">
       <div id="unity-canvas-container" style="width: 100%; height: 100%;">
         <canvas id="unity-canvas" style="width: 100%; height: 100%;"></canvas>
@@ -21,10 +61,11 @@
         </div>
       </div>
       <div id="unity-footer">
-	  <button id="enterar" value="Enter AR " disabled>AR</button>
         <div id="unity-webgl-logo"></div>
+		<button id="enterar" style="display:none;" value="Enter AR" disabled>AR</button>
       </div>
     </div>
+
     <script>
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/WebARTest.loader.js";
@@ -37,7 +78,7 @@
         productName: "Unity WebXR Export",
         productVersion: "0.1",
       };
-		clearCookies();
+      clearCookies();
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var canvasContainer = document.querySelector("#unity-canvas-container");
@@ -45,6 +86,8 @@
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
       var fullscreenButton = document.querySelector("#unity-fullscreen-button");
       var unityInstance = null;
+      var bgContainer = document.getElementById('bg-container'); // Reference to the background container
+
       
 
       loadingBar.style.display = "block";
@@ -56,38 +99,54 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((instance) => {
           unityInstance = instance;
-          loadingBar.style.display = "none";
+          loadingBar.style.display = "none";  // Hide loading bar
+          bgContainer.style.display = "block";  // Show background container and button
           if (fullscreenButton)
           {
             fullscreenButton.onclick = () => {
               unityInstance.SetFullscreen(1);
             };
           }
-		  
+
         }).catch((message) => {
           alert(message);
         });
       };
-	  function clearCookies() {
-		var cookies = document.cookie.split(";");
+      function clearCookies() {
+        var cookies = document.cookie.split(";");
 
-		for (var i = 0; i < cookies.length; i++) {
-			var cookie = cookies[i];
-			var eqPos = cookie.indexOf("=");
-			var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-			document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
-		}
-		return true;
-	}
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          var eqPos = cookie.indexOf("=");
+          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+        }
+        return true;
+      }
       document.body.appendChild(script);
 	  let enterARButton = document.getElementById('enterar');
-		  document.addEventListener('onARSupportedCheck', function (event) {
-			enterARButton.disabled = !event.detail.supported;			
-		  }, false);
+
+      document.addEventListener('onARSupportedCheck', function (event) {
+        enterARButton.disabled = !event.detail.supported;
+      }, false);
+     
       enterARButton.addEventListener('click', function (event) {
         unityInstance.Module.WebXR.toggleAR();
       }, false);
-	  
+       window.addEventListener('offline', function() {
+        console.log('You are offline. Waiting for the connection to be restored...');
+        // Optionally, display a message or visual indicator for offline status.
+    });
+
+    window.addEventListener('online', function() {
+        console.log('Network connection restored. Refreshing the page...');
+        window.location.reload();  // Automatically refresh when back online.
+    });
+      function EnableARFunc(){ 
+	bgContainer.style.display = "none";	  
+        unityInstance.Module.WebXR.toggleAR(); // Call AR function when the button is clicked
+      }
+
     </script>
   </body>
 </html>
