@@ -32,15 +32,18 @@
             pointer-events: auto; /* Allow interactions with Unity canvas */
             z-index: 1; /* Unity canvas above AR elements */
         }
+
+        /* Hide Unity loading bar by default */
+        #unity-loading-bar {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <!-- AR.js Scene -->
     <a-scene embedded arjs='sourceType: webcam;'>
         <a-entity camera></a-entity>
-
-        <!-- Your AR content here -->
-        <a-box position="0 0.5 0" material="color: red;"></a-box>
+        <!-- The Unity canvas will automatically be rendered on top of this scene -->
     </a-scene>
 
     <!-- Unity Container -->
@@ -103,7 +106,6 @@
             meta.name = 'viewport';
             meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
             document.getElementsByTagName('head')[0].appendChild(meta);
-            loadingBar.style.display = "block";
         }
 
         var script = document.createElement("script");
