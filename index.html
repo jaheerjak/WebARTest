@@ -1,126 +1,155 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en-us">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | KnokDown WebAR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KnokDown WebAR</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
-
-    <!-- A-Frame and AR.js Libraries -->
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/AR-js-org/AR.js/3.3.2/aframe/build/aframe-ar.js"></script>
-
-    <style>
-        /* Style for the AR scene */
-        a-scene {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0; /* AR.js scene behind Unity */
-        }
-
-        /* Style for the Unity container */
-        #unity-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: auto; /* Allow interactions with Unity canvas */
-            z-index: 1; /* Unity canvas above AR elements */
-        }
-
-        /* Hide Unity loading bar by default */
-        #unity-loading-bar {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <!-- AR.js Scene -->
-    <a-scene embedded arjs='sourceType: webcam;'>
-        <a-entity camera></a-entity>
-        <!-- The Unity canvas will automatically be rendered on top of this scene -->
     
+<script src = "sdk/blippar-webar-sdk-v2.0.4/webar-sdk/webar-sdk-v2.0.4.min.js?license-key=1b8b2d13-ed01-4a40-ab16-5b11592d799e"
+webar-mode="surface-tracking"
+static-camera = "true"
+auto-start="false"
+auto-init="false"
+enable-photo-ui="true"
+render-scene-on-desktop="false"
+show-qr-card-on-desktop="false"
+enable-tracking-on-desktop= "false"
+enable-mirroring-on-desktop= "false"
+hide-reset-button="false"
+auto-marker-detection ="true"
+show-guide-animation-url=""
+rendering-engine="unity"
+logo-src="images/blippar_logo.png"
+logo-height="200px"
+logo-width="200px"
+loading-progress-type="default"
+progress-dot-ring-scale="0.30"
+progress-dot-ring-color="#F7A400"
+progress-ring-scale="0.36"
+progress-ring-color="#F7A400"
+progress-ring-line-width="5"
 
-    <!-- Unity Container -->
-    <div id="unity-container">
-        <canvas id="unity-canvas" width=900 height=700 tabindex="-1"></canvas>
-        <div id="unity-loading-bar">
-            <div id="unity-logo"></div>
-            <div id="unity-progress-bar-empty">
-                <div id="unity-progress-bar-full"></div>
-            </div>
-        </div>
-        <div id="unity-warning"></div>
-        <div id="unity-footer">
-            <div id="unity-webgl-logo"></div>
-            <div id="unity-fullscreen-button"></div>
-            <div id="unity-build-title">KnokDown WebAR</div>
-        </div>
-    </div>
-	</a-scene>
-    <script>
-        var loadingBar = document.querySelector("#unity-loading-bar");
-        var progressBarFull = document.querySelector("#unity-progress-bar-full");
-        var warningBanner = document.querySelector("#unity-warning");
+alert-border-color=""
+alert-border-width=""
+alert-border-radius=""
+alert-background-color=""
+alert-message-text-color=""
+alert-button-color=""
+alert-button-text-color=""
+alert-button-height=""
+alert-button-border-radius=""
+alert-box-font-size=""
+alert-box-height=""
+alert-box-width=""
+alert-camera-permission-text=""
+alert-camera-permission-button-text=""
+alert-motion-permission-text=""
+alert-motion-permission-button-text=""
+    
+ui-background-color="#FFFFFF"
+ui-portrait-text="This experience is optimized for portrait display"
+ui-text-color="#000000"
+desktop-logo-src="images/blippar_logo.png"
+desktop-logo-width="150px"
+desktop-logo-height="150px"
+issue-img-src="images/test_issue_img.png"
+issue-img-width="116px"
+issue-img-height="116px"
 
-        // Function to show warning messages
-        function unityShowBanner(msg, type) {
-            function updateBannerVisibility() {
-                warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-            }
-            var div = document.createElement('div');
-            div.innerHTML = msg;
-            warningBanner.appendChild(div);
-            if (type === 'error') div.style = 'background: red; padding: 10px;';
-            else {
-                if (type === 'warning') div.style = 'background: yellow; padding: 10px;';
-                setTimeout(function () {
-                    warningBanner.removeChild(div);
-                    updateBannerVisibility();
-                }, 5000);
-            }
-            updateBannerVisibility();
+auto-scan-instruction="Find a marker to scan..."
+auto-scan-instruction-detect="Marker detecting..."
+auto-scan-instruction-idle="Shake your phone to start detection"
+auto-scan-instruction-text-style="color: orange;"
+auto-scan-style="Display: block; position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; width: auto; height: auto; text-alogn: center; "
+auto-scan-style-display="block"
+
+scan-btn-display="block"
+scan-btn-height="100px"
+scan-btn-width="100px"
+scan-btn-img-height="50"
+scan-btn-img-width="50"
+scan-btn-img-src="images/user_scan-btn-image_here.png"
+scan-btn-img-transform="translate(-25, -25)"
+scan-btn-img-x-coordinate="50%"
+scan-btn-img-y-coordinate="50%"
+
+scan-btn-instruction="Tap to scan"
+scan-btn-instruction-style="color: white;"
+scan-btn-progress-bar-color="blue"
+scan-btn-progress-bar-cx-coordinate="50"
+scan-btn-progress-bar-cy-coordinate="50"
+scan-btn-progress-bar-radius="35"
+scan-btn-progress-bar-transform="rotate(-90 50 50)"
+scan-btn-progress-circle-cx-coordinate="50%"
+scan-btn-progress-circle-cy-coordinate="50%"
+scan-btn-progress-circle-radius="35"
+scan-btn-progress-circle-style="fill: none; stroke: cyan; stroke-width: 6;"
+ios-camera-permission= "false"
+auto-scan-instruction-idle-on-desktop="Reload to detect a marker"
+
+show-guide-view="true"></script>
+
+  </head>
+  <body class="dark">
+      <div id="unity-container" class="unity-desktop">
+        <canvas id="unity-canvas" style="position: absolute;"></canvas>
+      </div>
+<script>
+
+var Yrotvalue = undefined;
+var UNITYINSTANCE = undefined;
+const cameraObjectName = "webarCamera";
+const stageObjectName = "webarStage";
+      const buildUrl = "Build";
+      const loaderUrl = buildUrl + "/WebAR-KnokDown WebAR.loader.js";
+      const config = {
+        dataUrl: buildUrl + "/WebAR-KnokDown WebAR.data",
+        frameworkUrl: buildUrl + "/WebAR-KnokDown WebAR.framework.js",
+        codeUrl: buildUrl + "/WebAR-KnokDown WebAR.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "KnokDown WebAR",
+        productVersion: "0.1",
+      };
+
+      const container = document.querySelector("#unity-container");
+      const canvas = document.querySelector("#unity-canvas");
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        container.className = "unity-mobile";
+        config.devicePixelRatio = 1;
+      }
+      else {
+        // Desktop Unity Container: set the container/canvas for full screen
+        container.style.width = "100%";
+        container.style.height = "100%";
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+      }
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+
+        }).then((unityInstance) => {
+          UNITYINSTANCE  = unityInstance;
+          }).catch((message) => {
+          alert(message);
+        });
+      };
+
+      //WEBAR SDK INIT function 
+      document.body.appendChild(script);
+	    function GetCommand(str){
+		        Yrotvalue=(str);
         }
 
-        var buildUrl = "Build";
-        var loaderUrl = buildUrl + "/WebARTest.loader.js";
-        var config = {
-            dataUrl: buildUrl + "/WebARTest.data",
-            frameworkUrl: buildUrl + "/WebARTest.framework.js",
-            codeUrl: buildUrl + "/WebARTest.wasm",
-            streamingAssetsUrl: "StreamingAssets",
-            companyName: "DefaultCompany",
-            productName: "KnokDown WebAR",
-            productVersion: "0.1",
-            showBanner: unityShowBanner,
-        };
-
-        // Handle mobile device styles
-        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-            var meta = document.createElement('meta');
-            meta.name = 'viewport';
-            meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-            document.getElementsByTagName('head')[0].appendChild(meta);
-        }
-
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-            createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-                progressBarFull.style.width = 100 * progress + "%";
-            }).then((unityInstance) => {
-                loadingBar.style.display = "none";
-            }).catch((message) => {
-                alert(message);
-            });
-        };
-
-        document.body.appendChild(script);
-    </script>
-</body>
+    WEBARSDK.InitUnityWebGL(canvas.id, cameraObjectName, stageObjectName, canvas.clientWidth, canvas.clientHeight);
+      </script>
+  </body>
 </html>
