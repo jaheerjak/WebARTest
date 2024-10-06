@@ -15,7 +15,7 @@ auto-start="false"
 auto-init="false"
 enable-photo-ui="true"
 render-scene-on-desktop="false"
-show-qr-card-on-desktop="false"
+show-qr-card-on-desktop="true"
 enable-tracking-on-desktop= "false"
 enable-mirroring-on-desktop= "false"
 hide-reset-button="false"
@@ -106,9 +106,9 @@ const stageObjectName = "webarStage";
       const buildUrl = "Build";
       const loaderUrl = buildUrl + "/WebAR-KnokDown WebAR.loader.js";
       const config = {
-        dataUrl: buildUrl + "/WebAR-KnokDown WebAR.data",
-        frameworkUrl: buildUrl + "/WebAR-KnokDown WebAR.framework.js",
-        codeUrl: buildUrl + "/WebAR-KnokDown WebAR.wasm",
+        dataUrl: buildUrl + "/WebAR-KnokDown WebAR.data.unityweb",
+        frameworkUrl: buildUrl + "/WebAR-KnokDown WebAR.framework.js.unityweb",
+        codeUrl: buildUrl + "/WebAR-KnokDown WebAR.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "KnokDown WebAR",
